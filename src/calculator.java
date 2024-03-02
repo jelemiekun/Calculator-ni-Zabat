@@ -28,7 +28,6 @@ public class calculator extends javax.swing.JFrame {
         textField = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
         btnPlus = new javax.swing.JButton();
-        btnRemoveLast = new javax.swing.JButton();
         btnSeven = new javax.swing.JButton();
         btn8 = new javax.swing.JButton();
         btn9 = new javax.swing.JButton();
@@ -63,13 +62,6 @@ public class calculator extends javax.swing.JFrame {
             }
         });
 
-        btnRemoveLast.setText("<-");
-        btnRemoveLast.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveLastActionPerformed(evt);
-            }
-        });
-
         btnSeven.setText("7");
         btnSeven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,8 +84,18 @@ public class calculator extends javax.swing.JFrame {
         });
 
         btnMinus.setText("-");
+        btnMinus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinusActionPerformed(evt);
+            }
+        });
 
         btnTimes.setText("*");
+        btnTimes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimesActionPerformed(evt);
+            }
+        });
 
         btnSix.setText("6");
         btnSix.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +133,11 @@ public class calculator extends javax.swing.JFrame {
         });
 
         btnDivide.setText("/");
+        btnDivide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDivideActionPerformed(evt);
+            }
+        });
 
         btnThree.setText("3");
         btnThree.addActionListener(new java.awt.event.ActionListener() {
@@ -172,9 +179,7 @@ public class calculator extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(textField, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnRemoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btnPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
@@ -221,8 +226,7 @@ public class calculator extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSeven, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,74 +255,217 @@ public class calculator extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void btnRemoveLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveLastActionPerformed
-        if (!textField.getText().isBlank()) {
-            String newString = textField.getText();
-            textField.setText("");
-            for (int i = 0; i < newString.length() - 1; i++) {
-                textField.setText(textField.getText() + newString.charAt(i));
+
+    private int numbersCounter = 0;
+    private double[] numbers = new double[100];
+    private String numberRightNow = "";
+    private int operationCounter = 0;
+    private String[] operations = new String[99];
+    private String operationRightNow = "";
+    private boolean entered = false;
+
+    private void addNumbersToArray() {
+        if (!numberRightNow.isBlank()) {
+            numbers[numbersCounter] = Double.parseDouble(numberRightNow);
+            numbersCounter++;
+            numberRightNow = "";
+            for (int i = 0; i < numbersCounter; i++) {
+                System.out.println(numbers[i]);
             }
         }
-    }//GEN-LAST:event_btnRemoveLastActionPerformed
+    }
 
+    private void addOperationToArray() {
+        if (!operationRightNow.isBlank()) {
+            operations[operationCounter] = operationRightNow;
+            operationCounter++;
+            operationRightNow = "";
+
+            for (int i = 0; i < operationCounter; i++) {
+                System.out.println(operations[i]);
+            }
+        }
+    }
+
+    private void clearAll() {
+        textField.setText("");
+        numbersCounter = 0;
+        numberRightNow = "";
+        operationCounter = 0;
+        operationRightNow = "";
+    }
+
+    private void calculate() {
+        double result = numbers[0];
+        for (int i = 0; i < operationCounter; i++) {
+            switch (operations[i]) {
+                case "+":
+                    result += numbers[i + 1];
+                    break;
+                case "-":
+                    result -= numbers[i + 1];
+                    break;
+                case "*":
+                    result *= numbers[i + 1];
+                    break;
+                case "/":
+                    if (numbers[i + 1] != 0) {
+                        result /= numbers[i + 1];
+                    } else {
+                        textField.setText("Cannot divide by zero.");
+                        return;
+                    }
+                    break;
+            }
+        }
+
+        textField.setText(String.valueOf(result));
+    }
+
+    private void entered() {
+        clearAll();
+        entered = false;
+    }
+    
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("8"));
+        numberRightNow += "8";
+        addOperationToArray();
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("9"));
+        numberRightNow += "9";
+        addOperationToArray();
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btnSixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSixActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("6"));
+        numberRightNow += "6";
+        addOperationToArray();
     }//GEN-LAST:event_btnSixActionPerformed
 
     private void btnFiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiveActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("5"));
+        addOperationToArray();
+        numberRightNow += "5";
     }//GEN-LAST:event_btnFiveActionPerformed
 
     private void btnTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTwoActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("2"));
+        numberRightNow += "2";
+        addOperationToArray();
     }//GEN-LAST:event_btnTwoActionPerformed
 
     private void btnThreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThreeActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("3"));
+        numberRightNow += "3";
+        addOperationToArray();
     }//GEN-LAST:event_btnThreeActionPerformed
 
     private void btnDotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDotActionPerformed
-        textField.setText(textField.getText().concat("."));
+        if (entered)
+            entered();
+        if (!numberRightNow.contains(".")) {
+            textField.setText(textField.getText().concat("."));
+            numberRightNow += ".";
+        }
     }//GEN-LAST:event_btnDotActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        textField.setText("");
+        clearAll();
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterActionPerformed
-        // TODO add your handling code here:
+        if (!textField.getText().isBlank()) {
+            addNumbersToArray();
+            calculate();
+        }
     }//GEN-LAST:event_btnEnterActionPerformed
 
     private void btnPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusActionPerformed
         if (!textField.getText().isBlank()) {
-            textField.setText(textField.getText().concat("+"));
+            if (operationRightNow.isBlank()) {
+                textField.setText(textField.getText().concat("+"));
+                operationRightNow = "+";
+                addNumbersToArray();
+            }
         }
     }//GEN-LAST:event_btnPlusActionPerformed
 
     private void btnSevenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSevenActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("7"));
+        numberRightNow += "7";
+        addOperationToArray();
     }//GEN-LAST:event_btnSevenActionPerformed
 
     private void btnOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOneActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("1"));
+        numberRightNow += "1";
+        addOperationToArray();
     }//GEN-LAST:event_btnOneActionPerformed
 
     private void btnFourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFourActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("4"));
+        numberRightNow += "4";
+        addOperationToArray();
     }//GEN-LAST:event_btnFourActionPerformed
 
     private void btnZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZeroActionPerformed
+        if (entered)
+            entered();
         textField.setText(textField.getText().concat("0"));
+        numberRightNow += "0";
+        addOperationToArray();
     }//GEN-LAST:event_btnZeroActionPerformed
+
+    private void btnMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinusActionPerformed
+        if (!textField.getText().isBlank()) {
+            if (operationRightNow.isBlank()) {
+                textField.setText(textField.getText().concat("-"));
+                operationRightNow = "-";
+                addNumbersToArray();
+            }
+        }
+    }//GEN-LAST:event_btnMinusActionPerformed
+
+    private void btnTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimesActionPerformed
+        if (!textField.getText().isBlank()) {
+            if (operationRightNow.isBlank()) {
+                textField.setText(textField.getText().concat("*"));
+                operationRightNow = "*";
+                addNumbersToArray();
+            }
+        }
+    }//GEN-LAST:event_btnTimesActionPerformed
+
+    private void btnDivideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivideActionPerformed
+        if (!textField.getText().isBlank()) {
+            if (operationRightNow.isBlank()) {
+                textField.setText(textField.getText().concat("/"));
+                operationRightNow = "/";
+                addNumbersToArray();
+            }
+        }
+    }//GEN-LAST:event_btnDivideActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,7 +514,6 @@ public class calculator extends javax.swing.JFrame {
     private javax.swing.JButton btnMinus;
     private javax.swing.JButton btnOne;
     private javax.swing.JButton btnPlus;
-    private javax.swing.JButton btnRemoveLast;
     private javax.swing.JButton btnSeven;
     private javax.swing.JButton btnSix;
     private javax.swing.JButton btnThree;
