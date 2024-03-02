@@ -370,7 +370,7 @@ public class calculator extends javax.swing.JFrame {
     private int operationCounter = 0;
     private String[] operations = new String[99];
     private String operationRightNow = "";
-    private boolean entered = false;
+    private boolean isUndefined = false;
 
     private void addNumbersToArray() {
         if (!numberRightNow.isBlank()) {
@@ -401,11 +401,10 @@ public class calculator extends javax.swing.JFrame {
         numberRightNow = "";
         operationCounter = 0;
         operationRightNow = "";
+        isUndefined = false;
     }
 
     private void calculate() {
-        entered = true;
-
         double result = numbers[0];
         for (int i = 0; i < operationCounter; i++) {
             switch (operations[i]) {
@@ -422,7 +421,8 @@ public class calculator extends javax.swing.JFrame {
                     if (numbers[i + 1] != 0) {
                         result /= numbers[i + 1];
                     } else {
-                        textField.setText("Cannot divide by zero.");
+                        isUndefined = true;
+                        textField.setText("UNDEFINED");
                         return;
                     }
                     break;
@@ -435,64 +435,57 @@ public class calculator extends javax.swing.JFrame {
             textField.setText(String.valueOf(result));
         }
     }
-
-    private void entered() {
-        clearAll();
-        entered = false;
-    }
     
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("8"));
         numberRightNow += "8";
         addOperationToArray();
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("9"));
         numberRightNow += "9";
         addOperationToArray();
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btnSixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSixActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("6"));
         numberRightNow += "6";
         addOperationToArray();
     }//GEN-LAST:event_btnSixActionPerformed
 
     private void btnFiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiveActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("5"));
         addOperationToArray();
         numberRightNow += "5";
     }//GEN-LAST:event_btnFiveActionPerformed
 
     private void btnTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTwoActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("2"));
         numberRightNow += "2";
         addOperationToArray();
     }//GEN-LAST:event_btnTwoActionPerformed
 
     private void btnThreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThreeActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("3"));
         numberRightNow += "3";
         addOperationToArray();
     }//GEN-LAST:event_btnThreeActionPerformed
 
     private void btnDotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDotActionPerformed
-        if (entered)
-            entered();
-        if (!numberRightNow.contains(".")) {
+        if (!numberRightNow.contains(".")  && !isUndefined) {
             textField.setText(textField.getText().concat("."));
             numberRightNow += ".";
         }
@@ -510,7 +503,7 @@ public class calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnterActionPerformed
 
     private void btnPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusActionPerformed
-        if (!textField.getText().isBlank()) {
+        if (!textField.getText().isBlank() && !isUndefined) {
             if (operationRightNow.isBlank()) {
                 textField.setText(textField.getText().concat("+"));
                 operationRightNow = "+";
@@ -520,39 +513,39 @@ public class calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPlusActionPerformed
 
     private void btnSevenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSevenActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("7"));
         numberRightNow += "7";
         addOperationToArray();
     }//GEN-LAST:event_btnSevenActionPerformed
 
     private void btnOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOneActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("1"));
         numberRightNow += "1";
         addOperationToArray();
     }//GEN-LAST:event_btnOneActionPerformed
 
     private void btnFourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFourActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("4"));
         numberRightNow += "4";
         addOperationToArray();
     }//GEN-LAST:event_btnFourActionPerformed
 
     private void btnZeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZeroActionPerformed
-        if (entered)
-            entered();
+        if (isUndefined)
+            clearAll();
         textField.setText(textField.getText().concat("0"));
         numberRightNow += "0";
         addOperationToArray();
     }//GEN-LAST:event_btnZeroActionPerformed
 
     private void btnMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinusActionPerformed
-        if (!textField.getText().isBlank()) {
+        if (!textField.getText().isBlank() && !isUndefined) {
             if (operationRightNow.isBlank()) {
                 textField.setText(textField.getText().concat("-"));
                 operationRightNow = "-";
@@ -562,7 +555,7 @@ public class calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinusActionPerformed
 
     private void btnTimesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimesActionPerformed
-        if (!textField.getText().isBlank()) {
+        if (!textField.getText().isBlank() && !isUndefined) {
             if (operationRightNow.isBlank()) {
                 textField.setText(textField.getText().concat("*"));
                 operationRightNow = "*";
@@ -572,7 +565,7 @@ public class calculator extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimesActionPerformed
 
     private void btnDivideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivideActionPerformed
-        if (!textField.getText().isBlank()) {
+        if (!textField.getText().isBlank() && !isUndefined) {
             if (operationRightNow.isBlank()) {
                 textField.setText(textField.getText().concat("/"));
                 operationRightNow = "/";
