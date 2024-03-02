@@ -204,7 +204,7 @@
         <Component class="javax.swing.JButton" name="btnPlus">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="6f" red="be" type="rgb"/>
+              <Color blue="98" green="59" red="3b" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="30" style="0"/>
@@ -222,7 +222,7 @@
         <Component class="javax.swing.JButton" name="btnMinus">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="6f" red="be" type="rgb"/>
+              <Color blue="98" green="59" red="3b" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="30" style="0"/>
@@ -316,7 +316,7 @@
         <Component class="javax.swing.JButton" name="btnTimes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="6f" red="be" type="rgb"/>
+              <Color blue="98" green="59" red="3b" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="30" style="0"/>
@@ -334,7 +334,7 @@
         <Component class="javax.swing.JButton" name="btnDivide">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="6f" red="be" type="rgb"/>
+              <Color blue="98" green="59" red="3b" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="30" style="0"/>
@@ -447,7 +447,7 @@
         <Component class="javax.swing.JButton" name="btnEnter">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="6f" red="be" type="rgb"/>
+              <Color blue="98" green="59" red="3b" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="0"/>

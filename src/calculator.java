@@ -95,7 +95,7 @@ public class calculator extends javax.swing.JFrame {
             }
         });
 
-        btnPlus.setBackground(new java.awt.Color(190, 111, 0));
+        btnPlus.setBackground(new java.awt.Color(59, 89, 152));
         btnPlus.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         btnPlus.setForeground(new java.awt.Color(255, 255, 255));
         btnPlus.setText("+");
@@ -106,7 +106,7 @@ public class calculator extends javax.swing.JFrame {
             }
         });
 
-        btnMinus.setBackground(new java.awt.Color(190, 111, 0));
+        btnMinus.setBackground(new java.awt.Color(59, 89, 152));
         btnMinus.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         btnMinus.setForeground(new java.awt.Color(255, 255, 255));
         btnMinus.setText("-");
@@ -165,7 +165,7 @@ public class calculator extends javax.swing.JFrame {
             }
         });
 
-        btnTimes.setBackground(new java.awt.Color(190, 111, 0));
+        btnTimes.setBackground(new java.awt.Color(59, 89, 152));
         btnTimes.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         btnTimes.setForeground(new java.awt.Color(255, 255, 255));
         btnTimes.setText("*");
@@ -176,7 +176,7 @@ public class calculator extends javax.swing.JFrame {
             }
         });
 
-        btnDivide.setBackground(new java.awt.Color(190, 111, 0));
+        btnDivide.setBackground(new java.awt.Color(59, 89, 152));
         btnDivide.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         btnDivide.setForeground(new java.awt.Color(255, 255, 255));
         btnDivide.setText("/");
@@ -247,7 +247,7 @@ public class calculator extends javax.swing.JFrame {
             }
         });
 
-        btnEnter.setBackground(new java.awt.Color(190, 111, 0));
+        btnEnter.setBackground(new java.awt.Color(59, 89, 152));
         btnEnter.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnEnter.setForeground(new java.awt.Color(255, 255, 255));
         btnEnter.setText("ENTER");
