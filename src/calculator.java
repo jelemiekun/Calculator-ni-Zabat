@@ -296,6 +296,8 @@ public class calculator extends javax.swing.JFrame {
     }
 
     private void calculate() {
+        entered = true;
+
         double result = numbers[0];
         for (int i = 0; i < operationCounter; i++) {
             switch (operations[i]) {
@@ -319,7 +321,11 @@ public class calculator extends javax.swing.JFrame {
             }
         }
 
-        textField.setText(String.valueOf(result));
+        if (result % 1 == 0) {
+            textField.setText(String.valueOf((int) result));
+        } else {
+            textField.setText(String.valueOf(result));
+        }
     }
 
     private void entered() {
