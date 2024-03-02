@@ -21,6 +21,7 @@ public class calculator extends javax.swing.JFrame {
      */
     public calculator() {
         initComponents();
+        this.setResizable(false);
     }
     
     /**
